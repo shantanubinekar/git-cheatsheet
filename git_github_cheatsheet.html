@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git & GitHub Cheat Sheet</title>
+<style>
+  :root{
+    --bg:#FAF8F3;
+    --ink:#222222;
+    --ink-soft:#666;
+    --card:#FFFFFF;
+    --line:#E8E4DA;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+    padding:32px 16px;
+  }
+  .wrap{max-width:880px;margin:0 auto;}
+
+  .title{
+    text-align:center;margin-bottom:8px;
+    font-size:38px;font-weight:800;
+    background:linear-gradient(90deg,#534AB7,#0F6E56,#D85A30);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .subtitle{
+    text-align:center;color:var(--ink-soft);margin-bottom:36px;font-size:15px;
+  }
+
+  .section{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    margin-bottom:24px;overflow:hidden;
+  }
+  .section-head{
+    padding:16px 24px;color:#fff;font-size:18px;font-weight:700;
+    display:flex;align-items:center;gap:10px;
+  }
+  .section-body{padding:20px 24px;}
+  .section-desc{color:var(--ink-soft);font-size:14px;margin-bottom:16px;}
+
+  .cmd{
+    display:flex;flex-direction:column;gap:4px;margin-bottom:14px;
+    padding-bottom:14px;border-bottom:1px solid var(--line);
+  }
+  .cmd:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  code.code{
+    display:inline-block;font-family:'Consolas','Monaco',monospace;
+    font-size:13.5px;font-weight:700;padding:4px 10px;border-radius:6px;
+    width:fit-content;
+  }
+  .cmd p{font-size:14px;color:var(--ink-soft);}
+
+  /* color themes per section */
+  .c1 .section-head{background:#534AB7;}
+  .c1 code.code{background:#EEEDFE;color:#3C3489;}
+
+  .c2 .section-head{background:#0F6E56;}
+  .c2 code.code{background:#E1F5EE;color:#085041;}
+
+  .c3 .section-head{background:#D85A30;}
+  .c3 code.code{background:#FAECE7;color:#712B13;}
+
+  .c4 .section-head{background:#185FA5;}
+  .c4 code.code{background:#E6F1FB;color:#0C447C;}
+
+  .c5 .section-head{background:#993556;}
+  .c5 code.code{background:#FBEAF0;color:#72243E;}
+
+  .c6 .section-head{background:#3B6D11;}
+  .c6 code.code{background:#EAF3DE;color:#27500A;}
+
+  .c7 .section-head{background:#854F0B;}
+  .c7 code.code{background:#FAEEDA;color:#633806;}
+
+  .c8 .section-head{background:#5F5E5A;}
+  .c8 code.code{background:#F1EFE8;color:#2C2C2A;}
+
+  .note{
+    background:#FAEEDA;border:1px solid #EF9F27;border-radius:10px;
+    padding:14px 18px;font-size:13.5px;color:#633806;margin:14px 0;
+  }
+  .note b{color:#412402;}
+  .warn{
+    background:#FCEBEB;border:1px solid #F09595;border-radius:10px;
+    padding:14px 18px;font-size:13.5px;color:#791F1F;margin:14px 0;
+  }
+  .warn b{color:#501313;}
+
+  .step-list{font-size:14px;color:var(--ink-soft);padding-left:20px;margin-top:8px;}
+  .step-list li{margin-bottom:4px;}
+
+  .platform-item{margin-bottom:14px;}
+  .platform-item b{display:block;font-size:14.5px;margin-bottom:2px;color:var(--ink);}
+  .platform-item p{font-size:14px;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="title">Git &amp; GitHub Cheat Sheet</div>
+  <p class="subtitle">A complete, scannable command reference — organized by workflow stage</p>
+
+  <!-- 1 -->
+  <div class="section c1">
+    <div class="section-head">⚙️ 1. Initial setup &amp; configuration</div>
+    <div class="section-body">
+      <p class="section-desc">Configure your global identity so commits are stamped with your name and email.</p>
+      <div class="cmd"><code class="code">git config --global user.name "Your Name"</code><p>Sets the global username for your commits.</p></div>
+      <div class="cmd"><code class="code">git config --global user.email "yourmail@example.com"</code><p>Sets the global email address for your commits.</p></div>
+      <div class="cmd"><code class="code">git config --global --list</code><p>Lists all active configurations to verify they were set correctly.</p></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section c2">
+    <div class="section-head">🧭 2. Terminal navigation essentials</div>
+    <div class="section-body">
+      <p class="section-desc">Baseline shell commands for moving around and managing folders.</p>
+      <div class="cmd"><code class="code">pwd</code><p>Print working directory — shows the absolute path of your current folder.</p></div>
+      <div class="cmd"><code class="code">ls</code><p>Lists all visible files and folders in the current directory.</p></div>
+      <div class="cmd"><code class="code">ls -a</code><p>Lists visible AND hidden files/folders — useful for seeing the hidden <code>.git</code> folder.</p></div>
+      <div class="cmd"><code class="code">cd &lt;folder_name&gt;</code><p>Moves forward into the specified folder.</p></div>
+      <div class="cmd"><code class="code">cd ..</code><p>Moves one step back to the parent directory.</p></div>
+      <div class="cmd"><code class="code">mkdir &lt;folder_name&gt;</code><p>Creates a new empty folder in the current location.</p></div>
+      <div class="cmd"><code class="code">clear</code><p>Clears the terminal screen.</p></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section c3">
+    <div class="section-head">🌐 3. Existing repo workflow (GitHub-first)</div>
+    <div class="section-body">
+      <p class="section-desc">Use this when the repo already exists on GitHub and you're bringing it onto your machine.</p>
+      <div class="cmd"><code class="code">git clone &lt;repository_https_url&gt;</code><p>Downloads a remote repository from GitHub onto your local machine.</p></div>
+      <div class="cmd"><code class="code">git status</code><p>Shows the current state of files — untracked, modified, or staged.</p></div>
+
+      <div class="note">
+        <b>💡 The two-step commit process:</b><br>
+        Think of it like a relationship milestone —<br>
+        1. <b>Staging</b> (<code style="background:none;font-weight:700;">git add</code>) → the "engagement" stage, files are prepared.<br>
+        2. <b>Committing</b> (<code style="background:none;font-weight:700;">git commit</code>) → the "wedding" stage, changes are permanently recorded.
+      </div>
+
+      <div class="cmd"><code class="code">git add &lt;file_name&gt;</code><p>Moves a specific file's changes into the staging area.</p></div>
+      <div class="cmd"><code class="code">git add .</code><p>Stages all new, modified, and deleted files at once.</p></div>
+      <div class="cmd"><code class="code">git commit -m "message"</code><p>Permanently saves staged changes to local history.</p></div>
+      <div class="cmd"><code class="code">git push origin main</code><p>Sends local commits to the remote GitHub repository on the <code style="background:none;font-weight:700;">main</code> branch.</p></div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section c4">
+    <div class="section-head">📁 4. Local-first workflow (new repo)</div>
+    <div class="section-body">
+      <p class="section-desc">Use this when you have an existing folder and want to turn it into a Git repo + push to GitHub.</p>
+      <div class="cmd"><code class="code">git init</code><p>Initializes a new local repo by creating a hidden <code style="background:none;font-weight:700;">.git</code> tracking folder.</p></div>
+      <div class="cmd"><code class="code">git remote add origin &lt;repository_https_url&gt;</code><p>Connects your local repo to a remote one, naming it <code style="background:none;font-weight:700;">origin</code>.</p></div>
+      <div class="cmd"><code class="code">git remote -v</code><p>Verifies the connection by showing the linked remote URLs.</p></div>
+      <div class="cmd"><code class="code">git push -u origin main</code><p>Pushes for the first time and sets upstream tracking — future pushes just need <code style="background:none;font-weight:700;">git push</code>.</p></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section c5">
+    <div class="section-head">🌿 5. Branch management</div>
+    <div class="section-body">
+      <p class="section-desc">Branches let you work on features in isolation without overwriting others' work.</p>
+      <div class="cmd"><code class="code">git branch</code><p>Lists all local branches — current active branch is marked with *.</p></div>
+      <div class="cmd"><code class="code">git branch -m &lt;new_branch_name&gt;</code><p>Renames the current branch (e.g. old <code style="background:none;font-weight:700;">master</code> → <code style="background:none;font-weight:700;">main</code>).</p></div>
+      <div class="cmd"><code class="code">git checkout &lt;branch_name&gt;</code><p>Switches your active workspace to the specified branch.</p></div>
+      <div class="cmd"><code class="code">git checkout -b &lt;new_branch_name&gt;</code><p>Creates a new branch and switches to it instantly.</p></div>
+      <div class="cmd"><code class="code">git branch -d &lt;branch_name&gt;</code><p>Deletes a local branch (switch away from it first).</p></div>
+      <div class="cmd"><code class="code">git push origin &lt;branch_name&gt;</code><p>Pushes a feature branch to GitHub to share with the team.</p></div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section c6">
+    <div class="section-head">🔀 6. Merging &amp; collaborative syncing</div>
+    <div class="section-body">
+      <p class="section-desc">Bring a finished feature back into the main timeline and stay in sync with teammates.</p>
+      <div class="cmd"><code class="code">git diff &lt;branch_name&gt;</code><p>Compares your active branch with another to see what lines differ.</p></div>
+      <div class="cmd"><code class="code">git pull origin main</code><p>Fetches and merges the latest remote changes into your local workspace.</p></div>
+
+      <div class="warn">
+        <b>⚠️ Resolving merge conflicts</b>
+        <ol class="step-list">
+          <li>Open the file — look for <code style="background:none;font-weight:700;">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code style="background:none;font-weight:700;">=======</code>, and <code style="background:none;font-weight:700;">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch_name</code> markers.</li>
+          <li>Use your editor's options to accept current, incoming, or both changes.</li>
+          <li>Save, then run <code style="background:none;font-weight:700;">git add .</code> and <code style="background:none;font-weight:700;">git commit -m "resolved merge conflict"</code>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section c7">
+    <div class="section-head">🕓 7. History &amp; undoing changes</div>
+    <div class="section-body">
+      <p class="section-desc">Track your history and roll back mistakes safely (or not so safely).</p>
+      <div class="cmd"><code class="code">git log</code><p>Shows commit history with hash IDs. Press <code style="background:none;font-weight:700;">q</code> to exit.</p></div>
+      <div class="cmd"><code class="code">git reset &lt;file_name&gt;</code><p>Unstages a file, moving it back to a normal modified state.</p></div>
+      <div class="cmd"><code class="code">git reset HEAD~1</code><p>Rolls back one commit — changes return to your unstaged working folder.</p></div>
+      <div class="cmd"><code class="code">git reset &lt;commit_hash_id&gt;</code><p>Rolls history back to a specific past commit by its hash.</p></div>
+
+      <div class="warn">
+        <b>🚨 Extreme caution:</b> <code style="background:none;font-weight:700;">git reset --hard &lt;commit_hash_id&gt;</code> instantly destroys current progress and resets both history and files to match that commit exactly.
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section c8">
+    <div class="section-head">🌍 8. Open source &amp; GitHub web features</div>
+    <div class="section-body">
+      <p class="section-desc">Actions performed on github.com rather than the terminal.</p>
+      <div class="platform-item">
+        <b>🍴 Forking</b>
+        <p>Creates a full copy of someone else's public repo into your own account — your personal "rough notebook" to experiment with.</p>
+      </div>
+      <div class="platform-item">
+        <b>🔁 Pull request (PR)</b>
+        <p>A formal request telling a repo's owners that you've pushed changes and would like them reviewed and merged into the main project.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
